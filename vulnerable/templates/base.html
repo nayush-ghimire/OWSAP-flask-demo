@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head><title>OWASP Demo</title></head>
+<body>
+<nav>
+    {% if session.username %}
+        Logged in as {{ session.username }} | <a href="/logout">Logout</a>
+    {% else %}
+        <a href="/login">Login</a>
+    {% endif %}
+</nav>
+{% block content %}{% endblock %}
+</body>
+</html>
