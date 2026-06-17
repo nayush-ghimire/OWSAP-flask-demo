@@ -26,3 +26,26 @@ def get_all_posts():
     posts = conn.execute("SELECT * FROM posts").fetchall()
     conn.close()
     return posts
+
+def get_user_posts(user_id):
+    conn = get_db()
+    posts = conn.execute(
+        "SELECT * FROM posts WHERE user_id = ?", (user_id,)
+    ).fetchall()
+    conn.close()
+    return posts
+
+
+def search_posts_secure(query):
+    conn = get_db()
+
+    # SQL Injection fix
+    sql = "SELECT * FROM posts WHERE title LIKE ?"
+
+    posts = conn.execute(
+        sql,
+        (f"%{query}%",)
+    ).fetchall()
+
+    conn.close()
+    return posts

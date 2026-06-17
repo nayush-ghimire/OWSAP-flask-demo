@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method="GET">
+    <input type="text" name="q" value="{{ query }}">
+    <button type="submit">Search</button>
+</form>
+<ul>
+{% for post in results %}
+    <li>{{ post['title'] | safe }}</li>  <!-- A03: unescaped output -->
+{% endfor %}
+</ul>
+{% endblock %}
